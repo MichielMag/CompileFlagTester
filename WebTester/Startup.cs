@@ -36,6 +36,11 @@ namespace WebTester
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebTester", Version = "v1" });
+#if ID_GUID
+                c.MapType<Identifier>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
+#else
+                c.MapType<Identifier>(() => new OpenApiSchema { Type = "number", Format = "long" });
+#endif
             });
         }
 
